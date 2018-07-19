@@ -38,7 +38,7 @@ void loop() {
   Wire.requestFrom(i2c_sensor_slave, sizeof(slave_data));    // request data from the Slave device the size of our struct
 
   while (Wire.available()) {
-      i2cSimpleRead(slave_data.sensor);
+      i2cSimpleRead(slave_data);
   }
 
 /*
@@ -47,7 +47,7 @@ void loop() {
   Wire.requestFrom(i2c_sensor_slave2, sizeof(slave2_data));    // request data from the Slave2 device the size of our struct
 
   while (Wire.available()) {
-      i2cSimpleRead(slave2_data.sensor);
+      i2cSimpleRead(slave2_data);
   }
 
 */
