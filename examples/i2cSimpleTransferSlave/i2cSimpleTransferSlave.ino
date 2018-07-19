@@ -45,7 +45,7 @@ void requestEvent() {
 }
 
 void receiveEvent (int payload) {
- if (payload >= (sizeof master_data)){
-       i2cSimpleRead(master_data);         // Receive new data from the Master
-   }
+    if ( payload == sizeof(master_data) ){
+        i2cSimpleRead(master_data);         // Receive new data from the Master
+    }
  }

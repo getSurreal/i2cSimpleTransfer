@@ -35,9 +35,9 @@ void setup() {
 }
 
 void loop() {
-    Wire.requestFrom(i2c_sensor_slave, sizeof(slave_data));    // request data from the Slave device the size of our struct
+    Wire.requestFrom( i2c_sensor_slave, sizeof(slave_data) );    // request data from the Slave device the size of our struct
 
-    while (Wire.available()) {
+    if ( Wire.available() == sizeof(slave_data) ) {
         i2cSimpleRead(slave_data);
     }
 
@@ -61,6 +61,6 @@ void loop() {
         Wire.endTransmission();
     }
 
-    delay(200);
+    delay(200);     // Just for example use.  Use some sort of timed action for implementation
 }
 
