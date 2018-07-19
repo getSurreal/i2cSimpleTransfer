@@ -30,37 +30,37 @@ SLAVE_DATA slave_data;
 MASTER_DATA master_data;
 
 void setup() {
-  Wire.begin();     // Begin i2c Master
-  Serial.begin(115200);
+    Wire.begin();     // Begin i2c Master
+    Serial.begin(115200);
 }
 
 void loop() {
-  Wire.requestFrom(i2c_sensor_slave, sizeof(slave_data));    // request data from the Slave device the size of our struct
+    Wire.requestFrom(i2c_sensor_slave, sizeof(slave_data));    // request data from the Slave device the size of our struct
 
-  while (Wire.available()) {
-      i2cSimpleRead(slave_data);
-  }
+    while (Wire.available()) {
+        i2cSimpleRead(slave_data);
+    }
 
 /*
-   ToDo  Test a second slave device
+    ToDo  Test a second slave device
 
-  Wire.requestFrom(i2c_sensor_slave2, sizeof(slave2_data));    // request data from the Slave2 device the size of our struct
+    Wire.requestFrom(i2c_sensor_slave2, sizeof(slave2_data));    // request data from the Slave2 device the size of our struct
 
-  while (Wire.available()) {
-      i2cSimpleRead(slave2_data);
-  }
+    while (Wire.available()) {
+        i2cSimpleRead(slave2_data);
+    }
 
 */
 
-Serial.println(slave_data.sensor);
+    Serial.println(slave_data.sensor);
 
-if (slave_data.sensor == 100) {
-    master_data.val = 100;
-    Wire.beginTransmission(i2c_sensor_slave);
-    i2cSimpleWrite(master_data);
-    Wire.endTransmission();
-}
+    if (slave_data.sensor == 100) {
+        master_data.val = 100;
+        Wire.beginTransmission(i2c_sensor_slave);
+        i2cSimpleWrite(master_data);
+        Wire.endTransmission();
+    }
 
-  delay(200);
+    delay(200);
 }
 
