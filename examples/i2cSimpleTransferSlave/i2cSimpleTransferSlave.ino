@@ -29,10 +29,10 @@ SLAVE_DATA slave_data;
 MASTER_DATA master_data;
 
 void setup() {
-  Wire.begin(i2c_slave_address);  // i2c Slave address
-  Wire.onRequest(requestEvent);   // when the Master makes a request, run this function
-  Wire.onReceive (receiveEvent);  // when the Master sends us data, run this function
-  master_data.val = 1;            // This is how much we increment after each request
+    Wire.begin(i2c_slave_address);    // i2c Slave address
+    Wire.onRequest(requestEvent);     // when the Master makes a request, run this function
+    Wire.onReceive (receiveEvent);    // when the Master sends us data, run this function
+    master_data.val = 1;              // This is how much we increment after each request
 }
 
 void loop() {
@@ -40,13 +40,12 @@ void loop() {
 }
 
 void requestEvent() {
-  i2cSimpleWrite(slave_data.sensor);        // Send the Master the sensor data
-  slave_data.sensor += master_data.val;  // Simulate updated sensor data
+    i2cSimpleWrite(slave_data);            // Send the Master the sensor data
+    slave_data.sensor += master_data.val;  // Simulate updated sensor data
 }
 
 void receiveEvent (int payload) {
- if (payload >= (sizeof master_data))
-   {
-       i2cSimpleRead(master_data);    // Receive new data from the Master
+ if (payload >= (sizeof master_data)){
+       i2cSimpleRead(master_data);         // Receive new data from the Master
    }
  }
