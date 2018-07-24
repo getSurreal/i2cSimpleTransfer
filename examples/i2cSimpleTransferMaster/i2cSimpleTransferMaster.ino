@@ -10,7 +10,7 @@
 
     We start with a simulated sensor value.  Everytime the Master requests the value we increment the value.
 
-    Initially the value is incrementing by one.  
+    Initially the value is incrementing by one.
     When the Master recieves the 100th request, it sends a configuration change to the Slave to start incrementing by 100.
 
 */
@@ -22,12 +22,12 @@ struct SLAVE_DATA {
     uint16_t sensor;  // use specific declarations to ensure communication between 16bit and 32bit controllers
 };
 
-struct MASTER_DATA {
+struct SLAVE_CONFIG {
     uint8_t val;     // use specific declarations to ensure communication between 16bit and 32bit controllers
 };
 
 SLAVE_DATA slave_data;
-MASTER_DATA master_data;
+SLAVE_CONFIG slave_config;
 
 void setup() {
     Wire.begin();     // Begin i2c Master
@@ -55,9 +55,9 @@ void loop() {
     Serial.println(slave_data.sensor);
 
     if (slave_data.sensor == 100) {
-        master_data.val = 100;
+        slave_config.val = 100;
         Wire.beginTransmission(i2c_sensor_slave);
-        i2cSimpleWrite(master_data);
+        i2cSimpleWrite(slave_config);
         Wire.endTransmission();
     }
 
